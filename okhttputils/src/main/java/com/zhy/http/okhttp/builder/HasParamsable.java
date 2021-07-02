@@ -7,6 +7,6 @@ import java.util.Map;
  */
 public interface HasParamsable
 {
-    OkHttpRequestBuilder params(Map<String, String> params);
+    OkHttpRequestBuilder params(Map<String, String> params,boolean isEncry);
     OkHttpRequestBuilder addParams(String key, String val);
 }

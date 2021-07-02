@@ -47,10 +47,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 HashMap<String, String> map = new HashMap<>();
                 map.put("password", "Bjhl.7334453");
-                map.put("username", "13233219542");
+                map.put("username", "钢铁侠");
                 OkHttpUtils.post()
                         .url("http://192.168.11.87:7443/app/appLogin")
-                        .params(map)
+                        .params(map,false)
                         .build()
                         .execute(new StringCallback() {
                             @Override
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onResponse(String response, int id) {
-                                System.out.println("===="+response);
+
                             }
                         });
             }

@@ -22,11 +22,9 @@ public class KLogApplication extends Application {
     public void onCreate() {
         super.onCreate();
         if (BuildConfig.DEBUG == true) {
-            System.out.println("true");
             KLog.init(true);
         } else {
             KLog.init(false);
-            System.out.println("false");
         }
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder()

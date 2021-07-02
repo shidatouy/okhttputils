@@ -1,5 +1,7 @@
 package com.zhy.http.okhttp.builder;
 
+import android.util.Base64;
+
 import com.socks.library.KLog;
 import com.zhy.http.okhttp.request.PostFormRequest;
 import com.zhy.http.okhttp.request.RequestCall;
@@ -60,8 +62,10 @@ public class PostFormBuilder extends OkHttpRequestBuilder<PostFormBuilder> imple
 
 
     @Override
-    public PostFormBuilder params(Map<String, String> params) {
-        params = setParams(params);
+    public PostFormBuilder params(Map<String, String> params,boolean isEncry) {
+        if(isEncry){
+            params = setParams(params);
+        }
         this.params = params;
         params(this.url, this.params);
         return this;
@@ -89,9 +93,10 @@ public class PostFormBuilder extends OkHttpRequestBuilder<PostFormBuilder> imple
 
         String time = System.currentTimeMillis() / 1000L + "";
         String jsonText = Util.gson.toJson(map);
-        map.put("data", jsonText);
+        String encodedString = Base64.encodeToString(jsonText.getBytes(), Base64.DEFAULT);
+        map.put("data", encodedString);
         map.put("time", time);
-        map.put("checksum", Util.getSha1("nyyc" + Util.toMD5(jsonText) + time));
+        map.put("checksum", Util.getSha1("nyyc" + Util.toMD5(encodedString) + time));
         return map;
     }
 
@@ -107,7 +112,7 @@ public class PostFormBuilder extends OkHttpRequestBuilder<PostFormBuilder> imple
             entry = (Map.Entry)var3.next();
         }
 
-        KLog.e("请求参数 ------ " + url + "?" + params);
+        KLog.i("请求参数 ------ " + url + "?" + params);
     }
 
 }

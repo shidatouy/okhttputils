@@ -121,10 +121,10 @@ public class OkHttpUtils {
 
                     Object o = finalCallback.parseNetworkResponse(response, id);
                     sendSuccessResultCallback(o, finalCallback, id);
-                    KLog.json(o.toString());
+                    KLog.i(" -----  返回结果： " + o.toString());
                 } catch (Exception e) {
                     sendFailResultCallback(call, e, finalCallback, id);
-                    KLog.e(" -----  错误信息： "+e.getMessage());
+                    KLog.e(" -----  错误信息： " + e.getMessage());
                 } finally {
                     if (response.body() != null)
                         response.body().close();
