@@ -62,10 +62,7 @@ public class PostFormBuilder extends OkHttpRequestBuilder<PostFormBuilder> imple
 
 
     @Override
-    public PostFormBuilder params(Map<String, String> params,boolean isEncry) {
-        if(isEncry){
-            params = setParams(params);
-        }
+    public PostFormBuilder params(Map<String, String> params) {
         this.params = params;
         params(this.url, this.params);
         return this;
@@ -78,30 +75,6 @@ public class PostFormBuilder extends OkHttpRequestBuilder<PostFormBuilder> imple
         }
         params.put(key, val);
         return this;
-    }
-
-    public static Map<String, String> setParams(Map<String, String> params) {
-        Map<String, String> map = new HashMap();
-        Iterator var2 = params.entrySet().iterator();
-
-        while(var2.hasNext()) {
-            Map.Entry<String, String> entry = (Map.Entry)var2.next();
-            if (!strEmpty((String)entry.getValue())) {
-                map.put(entry.getKey(), entry.getValue());
-            }
-        }
-
-        String time = System.currentTimeMillis() / 1000L + "";
-        String jsonText = Util.gson.toJson(map);
-        String encodedString = Base64.encodeToString(jsonText.getBytes(), Base64.DEFAULT);
-        map.put("data", encodedString);
-        map.put("time", time);
-        map.put("checksum", Util.getSha1("nyyc" + Util.toMD5(encodedString) + time));
-        return map;
-    }
-
-    public static boolean strEmpty(String value) {
-        return null == value || "".equals(value) || "null".equals(value);
     }
 
     public static void params(String url, Map<String, String> map) {

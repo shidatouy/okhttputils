@@ -49,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
                 map.put("password", "Bjhl.7334453");
                 map.put("username", "钢铁侠");
                 OkHttpUtils.post()
-                        .url("http://192.168.11.87:7443/app/appLogin")
-                        .params(map,false)
+                        .url("http://192.168.11.82:1443/app/appLogin")
+                        .params(map)
                         .build()
                         .execute(new StringCallback() {
                             @Override

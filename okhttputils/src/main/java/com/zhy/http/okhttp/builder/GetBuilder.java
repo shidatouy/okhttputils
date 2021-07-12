@@ -45,7 +45,7 @@ public class GetBuilder extends OkHttpRequestBuilder<GetBuilder> implements HasP
 
 
     @Override
-    public GetBuilder params(Map<String, String> params,boolean isEncry)
+    public GetBuilder params(Map<String, String> params)
     {
         this.params = params;
         return this;
